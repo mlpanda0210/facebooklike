@@ -1,0 +1,22 @@
+<div class="panel">
+  <div class="panel-heading">
+    フォローされているユーザー(
+    <%=current_user.followers.count%>人)
+  </div>
+  <div class="panel-body">
+    <% current_user.followers.order("RANDOM()").first(5).each do |f| %>
+    <%= profile_img(f)%>
+    <% end %>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-heading">
+    フォローしているユーザー(<%=current_user.followed_users.count%>人)
+  </div>
+  <div class="panel-body">
+    <% current_user.followed_users.order("RANDOM()").first(5).each do |f| %>
+    <%= profile_img(f)%>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+<%= render partial: 'index', locals: {topic: @topic , comments: @topic.comments.order(created_at: :asc)} %>
+<%= render partial: 'form', locals: { comment: @topic.comments.build , topic: @topic } %>

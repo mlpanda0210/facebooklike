@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+  <title>Facebooklike</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+
+</head>
+<body>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <img><%= link_to image_tag("fb-logo.png"),root_path %></img>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+           <li><%= link_to '',notification_index_path ,class:"fa fa-bell fa-1x"%><span id="unread_count"><%= @notification_count %></span></li>
+            <script>
+            var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',{
+              encrypted: true
+            });
+            var channel = pusher.subscribe('user_<%= current_user.id %>_channel');
+            channel.bind('comment_created', function(data) {
+              alert(data.message);
+            });
+            channel.bind('notification_created', function(data) {
+              $('#unread_count').html(data.unread_counts);
+            });
+            </script>
+            <li><%= link_to '', topics_my_topic_path , class:"fa fa-address-card"%></li>
+            <li><%= link_to '', users_path , class:"fa fa-users" %></li>
+            <li><%= link_to '', conversations_path, class:"fa fa-envelope-o" %></li>
+            <li><%= link_to '', edit_user_registration_path , class:"fa fa-cog"%></li>
+            <li><%= link_to '', destroy_user_session_path,class:"fa fa-sign-out", method: :delete %></li>
+            <% else %>
+            <li><%= link_to '', new_user_session_path,class:"fa fa-sign-in"  %></li>
+
+            <% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </header>
+
+  <%= yield %>
+
+</body>
+</html>

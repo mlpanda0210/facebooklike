@@ -1,0 +1,1 @@
+$("#like_area_"+"<%= @topic.id %>").html("<%= j(render partial: 'topics/like_form', locals: { topic: @topic, topics: @topics ,likes: @likes, like: @like } ) %>")

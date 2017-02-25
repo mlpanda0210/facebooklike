@@ -1,0 +1,8 @@
+
+<span id="like_area_<%= topic.id%>">
+  <% unless topic.like_topic(current_user) %>
+  <%= link_to '', topic_likes_path(topic) ,class:"fa fa-thumbs-o-up",  method: :post,remote: true %>
+  <% else %>
+  <%= link_to '', topic_like_path(topic,user_id: current_user.id,topic_id: topic.id) ,class:"fa fa-thumbs-up", method: :delete, remote: true %>
+  <% end %>
+</span>

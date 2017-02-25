@@ -1,0 +1,13 @@
+<div class="panel">
+  <div class="panel-heading">
+    <% @likes.each do |like| %>
+    <p><%= profile_img(like.user) %><%= like.user.name %>が
+      <%if like.user.name == like.topic.user.name %>
+      自分
+      <% else %>
+      <%= like.topic.user.name %>
+      <% end %>
+      の<%= link_to "投稿",topic_path(like.topic.id)%> にいいね！しました。</p>
+      <% end %>
+    </div>
+  </div>

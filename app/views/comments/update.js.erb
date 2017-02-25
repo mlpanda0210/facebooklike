@@ -1,0 +1,2 @@
+$("#comments_input_area").html("<%= j(render 'comments/update', { comments: @comment.topic.comments, topic: @comment.topic }) %>")
+$(':text').val('')

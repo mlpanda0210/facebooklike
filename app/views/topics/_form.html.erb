@@ -1,0 +1,35 @@
+
+
+    <%= form_for(@topic) do |f| %>
+    <% if @topic.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
+      <ul>
+        <% @topic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <div class="panel">
+      <div class="panel-heading">
+        <div class="field">
+          <%= f.text_area :content , :placeholder => "今なにしてる？" ,class: 'form-control'%>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="field">
+          <% if @topic.image? %>
+          <div class="thumbnail">
+            <%= image_tag @topic.image.url %>
+          </div>
+          <% end %><br>
+          <%= f.file_field :image %>
+          <%= f.hidden_field :image_cache %>
+        </div>
+        <div class="actions">
+          <%= f.submit "投稿する", class: 'btn btn-primary btn-sm' %>
+        </div>
+        <% end %>
+      </div>
+    </div>

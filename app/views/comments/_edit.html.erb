@@ -1,0 +1,22 @@
+<ul>
+  <% comments.each do |comment| %>
+    <% unless comment.id.nil? %>
+      <li>
+        <% if comment.id.to_s == params[:id] %>
+        <%= form_for([topic,comment] ,remote: true) do |f| %>
+          <%= f.hidden_field :topic_id %>
+          <div class="field">
+            <%= f.text_field :content, placeholder: "内容", class: "form-control"  %>
+          </div>
+          <div class="actions">
+            <%= f.submit  "コメントを更新する" ,class:"btn btn-primary"%>
+          </div>
+          <% end %>
+          <% else %>
+          <p class="left"><%= comment.user.name %>さんがコメントしました。</p>
+          <p class="left"><%= comment.content %></p>
+          <% end %>
+        </li>
+    <% end %>
+  <% end %>
+</ul>
