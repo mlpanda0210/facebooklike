@@ -4,13 +4,12 @@
     <ul>
       <% @notifications.each do |notification| %>
       <hr>
-        <span><%= if notification.read == false then "未読" else "既読" end%></span>
-        <p>
-          <%= notification.comment.user.try(:name) %>さんが
-          あなたの投稿に(<%= link_to "#{notification.comment.topic.title}",topic_path(notification.comment.topic, notification_id: notification.id)%>)にコメントしました。
-        </p>
-        <p><%= notification.created_at %></p>
-
+      <span><%= if notification.read == false then "未読" else "既読" end%></span>
+      <p>
+        <%= notification.comment.user.try(:name) %>さんが
+        あなたの<%= link_to "投稿",topic_path(notification.comment.topic, notification_id: notification.id)%>にコメントしました。
+      </p>
+      <p><%= notification.created_at %></p>
       <% end %>
     </ui>
   </div>

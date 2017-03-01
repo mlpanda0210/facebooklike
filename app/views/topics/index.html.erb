@@ -1,7 +1,7 @@
 
 <div class="container">
-  <p id="notice"><%= notice %></p>
   <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+    <p id="notice"><%= notice %></p>
     <%= render 'form' %>
   </div>
   <div class="col-md-8 col-md-offset-0 col-sm-8 col-sm-offset-2">
@@ -9,29 +9,33 @@
     <div class="panel">
       <div class="panel-heading">
         <%=image_tag topic.user.image_url %><%= topic.user.name %>さんが投稿しました。
+        <div class="btn-group btn-group-xs">
+          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to '投稿を編集する', edit_topic_path(topic) %></li>
+            <li><%= link_to '投稿を削除する', topic, method: :delete, data: { confirm: '投稿を削除しますか？' } %></li>
+          </ul>
+        </div>
       </div>
       <div class="panel-body">
         <p><%= topic.content %></p>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to '投稿を編集する', edit_topic_path(topic) %></li>
-            <li><%= link_to '投稿を削除する', topic, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-          </ul>
-        </li>
         <% if topic.image.url %>
         <div class="thumbnail">
           <%= image_tag topic.image.url %>
         </div>
         <% end %>
-        <%= link_to '', topic, class:"fa fa-comment-o" %>
+        <%= link_to 'コメントする　', topic, class:"fa fa-comment-o" %>
         <%= render 'like_form', user: current_user, topic: topic %>
         <%= paginate @topics %>
       </div>
     </div>
     <% end %>
   </div>
+  <% if @likes.present? %>
   <div class="col-md-4 hidden-sm hidden-xs">
     <%= render "like_index"%>
   </div>
+  <% end %>
 </div>

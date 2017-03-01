@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-           <li><%= link_to '',notification_index_path ,class:"fa fa-bell fa-1x"%><span id="unread_count"><%= @notification_count %></span></li>
+           <li><%= link_to "#{@notifications_count}",notification_index_path ,class:"fa fa-bell fa-1x"%><span id="unread_count"></span></li>
             <script>
             var pusher = new Pusher('<%= ENV["PUSHER_KEY"] %>',{
               encrypted: true
