@@ -6,6 +6,7 @@
   <div class="panel-body">
     <% current_user.followers.order("RANDOM()").first(5).each do |f| %>
     <%= profile_img(f)%>
+    <p><%= f.name%></p>
     <% end %>
   </div>
 </div>
@@ -17,6 +18,7 @@
   <div class="panel-body">
     <% current_user.followed_users.order("RANDOM()").first(5).each do |f| %>
     <%= profile_img(f)%>
+    <p><%= f.name%></p>
     <% end %>
   </div>
 </div>
