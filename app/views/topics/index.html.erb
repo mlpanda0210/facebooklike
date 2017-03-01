@@ -9,6 +9,7 @@
     <div class="panel">
       <div class="panel-heading">
         <%=image_tag topic.user.image_url %><%= topic.user.name %>さんが投稿しました。
+        <% if current_user.id == topic.user.id %>
         <div class="btn-group btn-group-xs">
           <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
             <span class="caret"></span>
@@ -18,6 +19,7 @@
             <li><%= link_to '投稿を削除する', topic, method: :delete, data: { confirm: '投稿を削除しますか？' } %></li>
           </ul>
         </div>
+        <% end %>
       </div>
       <div class="panel-body">
         <p><%= topic.content %></p>
