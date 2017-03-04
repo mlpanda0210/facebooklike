@@ -5,15 +5,15 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.page(params[:page])
+    @topics = Topic.page(params[:page]).order(created_at: :desc)
     @topic = Topic.new
     @likes = Like.limit(10).order(created_at: :desc)
   end
 
   def my_topic
     @topic = Topic.new
-    @topics = Topic.where(user_id: current_user.id)
-    @users = User.all 
+    @topics = Topic.where(user_id: current_user.id).order(created_at: :desc)
+    @users = User.all
     @likes = Like.limit(10)
 
   end

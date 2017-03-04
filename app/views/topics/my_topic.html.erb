@@ -30,6 +30,7 @@
             <li><%= link_to '投稿を削除する', topic, method: :delete, data: { confirm: '投稿を削除しますか？' } %></li>
           </ul>
         </div>
+        <p><%= topic.content %></p>
         <div class="thumbnail">
           <%= image_tag topic.image.url %>
         </div>
